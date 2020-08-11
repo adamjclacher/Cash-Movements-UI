@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Asura Markets - About{% endblock %}
+
+{% block content %}
+
+<div id="">
+  <h3>Please select a month</h3><br>
+</div>
+
+<ul class="list-group" style="text-decoration:none;">
+    <li class="list-group-item"  style="text-decoration:none;"><a href="{% url 'activityLogMonth' 0 %}">January</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 1 %}">February</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 2 %}">March</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 3 %}">April</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 4 %}">May</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 5 %}">June</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 6 %}">July</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 7 %}">August</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 8 %}">September</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 9 %}">October</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 10 %}">November</a></li>
+    <li class="list-group-item"><a href="{% url 'activityLogMonth' 11 %}">December</a></li>
+</ul>
+
+{% endblock %}

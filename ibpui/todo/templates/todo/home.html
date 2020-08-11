@@ -1,0 +1,231 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Asura Markets - Home{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+
+	{% for message in messages %}
+		<div class="alert alert-warning" role="alert">
+			<button class="close" data-dismiss="alert">
+				<small><sup>x</sup></small>
+			</button>
+			{{message}}
+		</div>
+	{% endfor %}
+
+{% endif %}
+<h4 class="Welcome">Welcome, {{user.username}}.</h4>
+<br>
+<div class="headerArea">
+	<div id="header">
+		<h3>Client Accounts</h3><br>
+	</div>
+	<div id="button">
+		<a href="{% url 'addClient' %}" class="button">Add New Client</a>
+	</div>
+</div>
+
+
+<form class="searchForm" style="margin-bottom:20px;">
+  <input class = "searchBar" type="search" placeholder="Search" aria-label="Search" name='search'>
+  <button class="searchButton" type="submit">Search</button>
+</form>
+
+	<div class="clientAccounts">
+		<table class="table table-bordered">
+			<div class="clientTableHeader">
+				<td style="min-width:20px;"><center><img src="../static/images/IBPIcons_View.svg" alt="View" width="30px"style="padding-top: 2px; padding-right:0px;"></center></td>
+				<td style="min-width:20px;"><img src="../static/images/IBPIcons_Edit.svg" alt="Edit" width="30px"style="padding-top: 2px"></td>
+				<td style="min-width:120px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' 'provider' %}"><h5>Provider</h5></a></td>
+				<td style="min-width:200px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' 'accountNumber' %}"><h5>Account Number</h5></a></td>
+				<td style="min-width:200px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' 'accountName' %}"><h5>Account Name</h5></a></td>
+				<td style="min-width:120px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' 'currency' %}"><h5>Currency</h5></a></td>
+				<td style="min-width:250px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' '-sortCodeABACA' %}"><h5>Sort Code / ABA / CA</h5></a></td>
+				<td style="min-width:250px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' '-bankAccountNumber' %}"><h5>Bank Account Number</h5></a></td>
+				<td style="min-width:300px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' '-IBAN' %}"><h5>IBAN</h5></a></td>
+				<td style="min-width:150px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' '-SWIFT' %}"><h5>SWIFT</h5></a></td>
+				<td style="min-width:200px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' 'presentOnDrive' %}"><h5>Present on Drive</h5></td>
+				<td style="min-width:120px;"><center><h5>Verify</h5></center></td>
+				<td style="min-width:200px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBy' 'dateVerified' %}"><center><h5>Date Verified</h5></center></a></td>
+				<td style="min-width:120px;"><center><h5>Remove</h5></center></td>
+			</div>
+			{% for things in all_items %}
+				{% if things.completed %}
+					<tr class="table">
+						<td><a href="{% url 'viewAccount' things.id %}">View</a></td>
+						<td></td>
+						<td>{{things.provider}}</td>
+						<td>{{things.accountNumber}}</td>
+						<td>{{things.accountName}}</td>
+						<td>{{things.currency}}</td>
+						<td>{{things.sortCodeABACA}}</td>
+						<td>{{things.bankAccountNumber}}</td>
+						<td>{{things.IBAN}}</td>
+						<td>{{things.SWIFT}}</td>
+						{% if things.presentOnDrive %}
+						<td>Yes</td>
+						{% else %}
+						<td>No</td>
+						{% endif %}
+						<td><center><a href="{% url 'uncross' things.id %}">Unverify</a></center></td>
+						<td><center>{{things.dateVerified |date:'d/m/Y'}}</center></td>
+						<td><center><a href="{% url 'delete' things.id %}">Delete</a></center>
+					</tr>
+				{% else %}
+					<tr class="table-danger">
+						<td><a href="{% url 'viewAccount' things.id %}">View</a></td>
+						<td><a href="{% url 'edit' things.id %}">Edit</a></td>
+						<td>{{things.provider}}</td>
+						<td>{{things.accountNumber}}</td>
+						<td>{{things.accountName}}</td>
+						<td>{{things.currency}}</td>
+						<td>{{things.sortCodeABACA}}</td>
+						<td>{{things.bankAccountNumber}}</td>
+						<td>{{things.IBAN}}</td>
+						<td>{{things.SWIFT}}</td>
+						{% if things.presentOnDrive %}
+						<td>Yes</td>
+						{% else %}
+						<td>No</td>
+						{% endif %}
+						<td><center><a href="{% url 'cross_off' things.id %}">Verify</a></center></td>
+						<td><center></center></td>
+						<td><center><a href="{% url 'delete' things.id %}">Delete</a></center>
+					</tr>
+				{% endif %}
+			{% endfor %}<!--For Loop!-->
+		</table>
+	</div>
+
+
+<br><br>
+<div class="headerArea">
+	<div id="header">
+		<h3>Cash Movement Requests</h3><br>
+	</div>
+	<div id="button">
+		<a href="{% url 'selectAccount' %}" class="button">Add New Request</a>
+	</div>
+</div>
+<br>
+
+<form class="searchForm">
+  <input class = "searchBar" type="search" placeholder="Search" aria-label="Search" name='searchRequests'>
+  <button class="searchButton" type="submit">Search</button>
+</form>
+<div class="clientAccounts">
+	<table class="table table-bordered">
+		<div class="clientTableHeader">
+			<td style="min-width:20px;"><center><img src="../static/images/IBPIcons_View.svg" alt="View" width="30px"style="padding-top: 2px; padding-right:0px;"></center></td>
+			<td style="min-width:200px;"><h5>Date Requested</h5></td>
+			<td style="min-width:220px;"><h5>Withdrawal / Deposit</h5></td>
+			<td style="min-width:120px;"><h5>Amount</h5></td>
+			<td style="min-width:120px;"><h5>Currency</h5></td>
+			<td style="min-width:120px;"><h5>Provider</h5></td>
+			<td style="min-width:200px;"><h5>Account Number</h5></td>
+			<td style="min-width:200px;"><h5>Account Name</h5></td>
+			<td style="min-width:120px;"><h5>Narrative</h5></td>
+			<td style="min-width:250px;"><h5>Sort Code / ABA / CA</h5></td>
+			<td style="min-width:250px;"><h5>Bank Account Number</h5></td>
+			<td style="min-width:300px;"><h5>IBAN</h5></td>
+			<td style="min-width:120px;"><h5>Notifications</h5></td>
+			<td style="min-width:250px;"><h5>Asura Internal Narrative</h5></td>
+			<td style="min-width:300px;"><h5>Asura Payment ID - Lloyds</h5></td>
+			<td style="min-width:300px;"><h5>Asura Payment ID - Provider</h5></td>
+			<td style="min-width:200px;"><h5>Cancel Request</h5></td>
+		</div>
+		{% for request in cashMovementRequests %}
+			{% if request.completed == False %}
+				<tr class="table">
+					<td><a href="{% url 'viewRequest' request.id %}">View</a></td>
+					<td>{{request.dateRequested|date:'d/m/Y'}}</td>
+					<td>{{request.withdrawlOrDeposit}}</td>
+					<td>{{request.amount}}</td>
+					<td>{{request.currency}}</td>
+					<td>{{request.provider}}</td>
+					<td>{{request.accountNumber}}</td>
+					<td>{{request.accountName}}</td>
+					<td>{{request.narrative}}</td>
+					<td>{{request.sortCodeABACA}}</td>
+					<td>{{request.bankAccountNumber}}</td>
+					<td>{{request.IBAN}}</td>
+					<td>{{request.Notifications}}</td>
+					<td>{{request.asuraInternalNarrative}}</td>
+					<td>{{request.asuraPaymentIDLloyds}}</td>
+					<td>{{request.asuraPaymentIDProvider}}</td>
+					<td><a href="{% url 'deleteRequest' request.id %}">Cancel</a></td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+</div>
+
+
+<br><br>
+<div class="headerArea">
+	<div id="header">
+		<h3>Completed Cash Movements</h3><br>
+	</div>
+	<div id="button">
+		<a href="{% url 'sendEmail' %}" class="button" hidden>Send E-mail</a>
+	</div>
+</div>
+<br>
+<form class="searchForm">
+  <input class = "searchBar" type="search" placeholder="Search" aria-label="Search" name='searchCompletedRequests'>
+  <button class="searchButton" type="submit">Search</button>
+</form>
+<div class="clientAccounts">
+	<table class="table table-bordered">
+		<div class="clientTableHeader">
+			<td style="min-width:20px;"><center><img src="../static/images/IBPIcons_View.svg" alt="View" width="30px"style="padding-top: 2px; padding-right:0px;"></center></td>
+			<td style="min-width:200px;"><h5>Date Requested</h5></td>
+			<td style="min-width:220px;"><h5>Withdrawal / Deposit</h5></td>
+			<td style="min-width:120px;"><h5>Amount</h5></td>
+			<td style="min-width:120px;"><h5>Currency</h5></td>
+			<td style="min-width:120px;"><h5>Provider</h5></td>
+			<td style="min-width:200px;"><h5>Account Number</h5></td>
+			<td style="min-width:200px;"><h5>Account Name</h5></td>
+			<td style="min-width:120px;"><h5>Narrative</h5></td>
+			<td style="min-width:250px;"><h5>Sort Code / ABA / CA</h5></td>
+			<td style="min-width:250px;"><h5>Bank Account Number</h5></td>
+			<td style="min-width:300px;"><h5>IBAN</h5></td>
+			<td style="min-width:120px;"><h5>Notifications</h5></td>
+			<td style="min-width:250px;"><h5>Asura Internal Narrative</h5></td>
+			<td style="min-width:300px;"><h5>Asura Payment ID - Lloyds</h5></td>
+			<td style="min-width:300px;"><h5>Asura Payment ID - Provider</h5></td>
+			<td style="min-width:200px;"><h5>Remove</h5></td>
+		</div>
+		{% for request in cashMovementRequestsComplete %}
+			{% if request.completed == True %}
+				<tr class="table">
+					<td><a href="{% url 'viewRequest' request.id %}">View</a></td>
+					<td>{{request.dateRequested|date:'d/m/Y'}}</td>
+					<td>{{request.withdrawlOrDeposit}}</td>
+					<td>{{request.amount}}</td>
+					<td>{{request.currency}}</td>
+					<td>{{request.provider}}</td>
+					<td>{{request.accountNumber}}</td>
+					<td>{{request.accountName}}</td>
+					<td>{{request.narrative}}</td>
+					<td>{{request.sortCodeABACA}}</td>
+					<td>{{request.bankAccountNumber}}</td>
+					<td>{{request.IBAN}}</td>
+					<td>{{request.Notifications}}</td>
+					<td>{{request.asuraInternalNarrative}}</td>
+					<td>{{request.asuraPaymentIDLloyds}}</td>
+					<td>{{request.asuraPaymentIDProvider}}</td>
+					<td><a href="{% url 'deleteRequest' request.id %}">Delete</a></td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+</div>
+
+
+
+
+<br>
+{% endblock %}

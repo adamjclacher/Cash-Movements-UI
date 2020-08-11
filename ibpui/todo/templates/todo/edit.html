@@ -1,0 +1,61 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Asura Markets - Edit{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+
+	{% for message in messages %}
+		<div class="alert alert-warning" role="alert">
+			<button class="close" data-dismiss="alert">
+				<small><sup>x</sup></small>
+			</button>
+			{{message}}
+		</div>
+	{% endfor %}
+{% endif %}
+
+<!--Do the things!-->
+{% if item %}
+	<h3>Edit "{{item.IBAN}}"</h3></br>
+
+	<form class="form-inline my-2 my-lg-0" method="POST">
+    {% csrf_token %}
+		<select class="inputBox" name="provider">
+			<option value="{{item.provider}}" selected hidden>{{item.provider}}</option>
+	 		<option value="Marex">Marex</option>
+	  	<option value="CredInvest">CredInvest</option>
+	 		<option value="MayBank">MayBank</option>
+	  	<option value="Cowen">Cowen</option>
+		</select>
+	  <!--<input class="inputBox" type="search" placeholder="*Provider" aria-label="Search" name="provider" value="{{item.provider}}">!-->
+    <input class="inputBox" type="search" placeholder="*Account Number" aria-label="Search" name="accountNumber" value="{{item.accountNumber}}">
+    <input class="inputBox" type="search" placeholder="*Account Name" aria-label="Search" name="accountName" value="{{item.accountName}}">
+		<select class="inputBox" name="currency">
+			<option value="{{item.currency}}" selected hidden>{{item.currency}}</option>
+	 		<option value="EUR">EUR</option>
+	  	<option value="GBP">GBP</option>
+	 		<option value="USD">USD</option>
+		</select>
+	  <!--<input class="inputBox" type="search" placeholder="*Currency" aria-label="Search" name="currency" value="{{item.currency}}">!-->
+    <input class="inputBox" type="search" placeholder="Sort Code / ABA / CA" aria-label="Search" name="sortCodeABACA" value="{{item.sortCodeABACA}}">
+    <input class="inputBox" type="search" placeholder="Bank Account Number" aria-label="Search" name="bankAccountNumber" value="{{item.bankAccountNumber}}">
+
+		{% if item.presentOnDrive %}
+		<input type="checkbox" id="presentOnDrive" name="presentOnDrive" checked>
+		{% else %}
+		<input type="checkbox" id="presentOnDrive" name="presentOnDrive" unchecked>
+		{% endif %}
+
+		<label for="presentOnDrive">Present on Drive</label>
+    <input class="inputBox" type="search" placeholder="*IBAN Number" aria-label="Search" name="IBAN" value="{{item.IBAN}}">
+    <input class="inputBox" type="search" placeholder="SWIFT Code" aria-label="Search" name="SWIFT" value="{{item.SWIFT}}">
+
+    <input type="hidden" value="{{item.completed}}" name="completed" >
+
+    <button class="button" type="submit">Edit Item</button>
+  </form>
+{% endif %}
+
+{% endblock %}

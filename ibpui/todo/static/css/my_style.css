@@ -1,0 +1,160 @@
+.navbar-brand:hover{
+	  text-shadow:1px 1px 50px #fff, 1px 1px 40px #ccc;
+}
+
+html{
+	min-width: 1000px;
+}
+
+.striker{
+	text-decoration: line-through;
+}
+
+
+h3{
+	color: #9B9B9B;
+	font-size: 40px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+h4{
+	color: #9B9B9B;
+	font-size: 30px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.clientAccounts{
+	width: 100%;
+	height: 350px;
+	overflow-y: scroll;
+	overflow-x : scroll;
+	outline: 2px solid #efefef;
+}
+
+.button {
+  background-color: #DE2026; /* IBP RED */
+  border: none;
+  color: white;
+  padding: 12px 15px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 170px;
+}
+
+.button1 {
+  background-color: #DE2026; /* IBP RED */
+  border: none;
+  color: white;
+  padding: 12px 15px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 170px;
+}
+
+.button:hover {
+	cursor: pointer;
+	text-decoration: none;
+	color: white;
+	background-color: #C62026; /* IBP HIGHLIGHTED RED */
+}
+
+.headerArea{
+	width: 100%;
+	box-sizing: border-box;
+	height: 50px;
+}
+
+#header{
+	float: left;
+	width: 50%;
+}
+
+#button{
+	float: left;
+	width: 50%;
+	text-align: right;
+}
+
+h5{
+	padding-bottom: 0px;
+	padding-top: 7px;
+	color: #9B9B9B;
+}
+
+.inputBox{
+	width:100%;
+	margin-bottom: 15px;
+}
+
+.inputBox::selection{
+	background-color: #DE2026;
+	color: white;
+}
+
+.nav-link{
+  background-color: Transparent;
+  border: none;
+  float: left;
+}
+
+.nav-link:hover{
+	text-shadow:1px 1px 50px #fff, 1px 1px 40px #ccc;
+}
+
+.IBPHeading{
+  color: #DE2026; /* IBP RED */
+}
+
+.AsuraHeading{
+	color: #3d6ae5;
+}
+
+.searchForm{
+	text-align: left;
+	width: 100%;
+	height: 80px;
+}
+
+.searchButton{
+	margin-left: 0;
+	float:right;
+	height: 40px;
+	width: 19%;
+	background-color: white;
+	border: 1px solid #9B9B9B;
+	color: #9B9B9B;
+	transition: 0.05s;
+}
+
+.searchBar{
+	margin-right:0px;
+	height: 40px;
+	width: 80%;
+	border: 1px solid #9B9B9B;
+	color: #9B9B9B;
+	padding-left: 4px;
+}
+
+.searchButton:hover{
+	height: 40px;
+	width: 20%;
+	background-color: white;
+	border: 1px solid #DE2026;
+	color: #DE2026;
+}
+
+@media screen and (max-width: 992px){
+
+	.nav-link{
+	  float: none;
+	}
+
+}

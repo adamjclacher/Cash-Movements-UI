@@ -1,0 +1,46 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Asura Markets - View{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+
+	{% for message in messages %}
+		<div class="alert alert-warning" role="alert">
+			<button class="close" data-dismiss="alert">
+				<small><sup>x</sup></small>
+			</button>
+			{{message}}
+		</div>
+	{% endfor %}
+
+{% endif %}
+
+
+<div id="">
+  <h3>View client account</h3><br>
+</div>
+
+<ul class="list-group">
+    <li class="list-group-item"><h4>{{item.IBAN}}</h4></li>
+    <li class="list-group-item">Provider: {{item.provider}}</li>
+		<li class="list-group-item">Account Number: {{item.accountNumber}}</li>
+		<li class="list-group-item">Account Name: {{item.accountName}}</li>
+		<li class="list-group-item">Currency: {{item.currency}}</li>
+		<li class="list-group-item">Sort Code / ABA / CA : {{item.sortCodeABACA}}</li>
+		<li class="list-group-item">Bank Account Number: {{item.bankAccountNumber}}</li>
+		<li class="list-group-item">IBAN: {{item.IBAN}}</li>
+		<li class="list-group-item">SWIFT: {{item.SWIFT}}</li>
+		<li class="list-group-item">Created by: {{item.user}}</li>
+		{% if item.completed == True %}
+		<li class="list-group-item">Date Verified: {{item.dateVerified|date:'d/m/Y'}}</li>
+		{%endif%}
+</ul>
+<br>
+{% if item.completed == False %}
+<a href="{% url 'edit' item.id %}" class="button">Edit Request</a>
+{%endif%}
+<br><br>
+
+{% endblock%}

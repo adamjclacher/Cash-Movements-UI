@@ -1,0 +1,32 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Asura Markets - About{% endblock %}
+
+{% block content %}
+
+<div id="">
+  <h3>{{monthSelected}}</h3><br>
+</div>
+<form class="searchForm">
+  <input class = "searchBar" type="search" placeholder="Search action..." aria-label="Search" name='search'>
+  <button class="searchButton" type="submit">Search</button>
+</form>
+<div class="clientAccounts" style="height:500px;">
+	<table class="table table-bordered">
+		<div class="clientTableHeader"><td style="min-width:100px;"><h5>Date</h5></td>
+			<td style="min-width:10px;"><h5>User</h5></td>
+			<td style="min-width:200px;"><h5>Action</h5></td>
+		</div>
+		{% for action in actions %}
+			{% if action.created.month == monthSelectedNumber %}
+				<tr class="table">
+					<td>{{action.created}}</td>
+					<td>{{action.user}}</td>
+					<td>{{action.description}}</td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+</div>
+
+{% endblock %}

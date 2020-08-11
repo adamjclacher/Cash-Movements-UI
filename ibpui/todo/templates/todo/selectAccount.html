@@ -1,0 +1,55 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Asura Markets - Home{% endblock %}
+
+{% block content %}
+
+
+<div class="headerArea">
+	<div id="header">
+		<h3>Select Account</h3><br>
+	</div>
+	<div id="button">
+		<a href="{% url 'addClient' %}" class="button" hidden>Add New Client</a>
+	</div>
+</div>
+
+<form class="searchForm">
+  <input class = "searchBar" type="search" placeholder="Search" aria-label="Search" name='search'>
+  <button class="searchButton" type="submit">Search</button>
+</form>
+	{% if all_items %}
+	<div class="clientAccounts">
+		<table class="table table-bordered">
+			<div class="clientTableHeader">
+				<td style="min-width:20px;"><img src="../static/images/IBPIcons_Select.svg" alt="Edit" width="30px"style="padding-top: 2px"></td>
+				<td style="min-width:120px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' 'provider' %}"><h5>Provider</h5></a></td>
+				<td style="min-width:200px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' 'accountNumber' %}"><h5>Account Number</h5></a></td>
+				<td style="min-width:200px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' 'accountName' %}"><h5>Account Name</h5></a></td>
+				<td style="min-width:120px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' 'currency' %}"><h5>Currency</h5></a></td>
+				<td style="min-width:250px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' '-sortCodeABACA' %}"><h5>Sort Code / ABA / CA</h5></a></td>
+				<td style="min-width:250px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' '-bankAccountNumber' %}"><h5>Bank Account Number</h5></a></td>
+				<td style="min-width:300px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' '-IBAN' %}"><h5>IBAN</h5></a></td>
+				<td style="min-width:150px;"><a style="text-decoration:none; color:black;" href="{% url 'orderBySelect' '-SWIFT' %}"><h5>SWIFT</h5></a></td>
+			</div>
+			{% for things in all_items %}
+				{% if things.completed %}
+					<tr class="table">
+						<td><a href="{% url 'addCashMovementRequest' things.id %}">Select</a></td>
+						<td>{{things.provider}}</td>
+						<td>{{things.accountNumber}}</td>
+						<td>{{things.accountName}}</td>
+						<td>{{things.currency}}</td>
+						<td>{{things.sortCodeABACA}}</td>
+						<td>{{things.bankAccountNumber}}</td>
+						<td>{{things.IBAN}}</td>
+						<td>{{things.SWIFT}}</td>
+					</tr>
+				{% endif %}
+			{% endfor %}<!--For Loop!-->
+		</table>
+	</div>
+	{% endif %}
+
+
+{% endblock %}
